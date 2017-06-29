@@ -1,10 +1,5 @@
 package com.olu.shiyanbade
 
-import java.util.Arrays.asList
-
-import org.hamcrest.core.Is.is
-import org.hamcrest.core.IsEqual.equalTo
-import org.junit.Assert.assertThat
 import org.junit.runner.RunWith
 import org.scalatest.FunSuite
 import org.scalatest.junit.JUnitRunner
@@ -33,7 +28,7 @@ class ShopCheckoutTest extends FunSuite {
   test("should return cost when shopping cart contains apples only") {
     new ShoppingCartToTest {
       val cost = checkoutSystem.checkout(List("apple", "apple", "apple"))
-      assert(cost == 1.8)
+      assert(cost == 1.2)
     }
   }
 
@@ -47,7 +42,7 @@ class ShopCheckoutTest extends FunSuite {
   test("should return cost when shopping cart contains oranges and apples") {
     new ShoppingCartToTest {
       val cost = checkoutSystem.checkout(List("Orange", "Orange", "Apple", "apple", "Orange"))
-      assert(cost == 1.95)
+      assert(cost == 1.1)
     }
   }
 
@@ -62,6 +57,37 @@ class ShopCheckoutTest extends FunSuite {
     new ShoppingCartToTest {
       val cost = checkoutSystem.checkout(List("pear", "orange", "kiwi", "apple", "orange"))
       assert(cost == 1.1)
+    }
+  }
+
+  test("should not charge for second apple when cart contains two apples only") {
+    new ShoppingCartToTest {
+      val cost = checkoutSystem.checkout(List("apple", "apple"))
+      assert(cost == 0.6)
+    }
+  }
+
+  test("should not charge for every second apple when cart contains more than two apples") {
+    new ShoppingCartToTest {
+      val cost = checkoutSystem.checkout(List("apple", "apple", "apple", "APPLE"))
+      assert(cost == 1.2)
+    }
+  }
+
+  test("should not charge for third orange when cart contains three oranges only") {
+    new ShoppingCartToTest {
+      val cost = checkoutSystem.checkout(List("orange", "orange", "orange"))
+      assert(cost == 0.5)
+    }
+  }
+
+  test("should not charge for every third orange when cart contains more than three oranges") {
+    new ShoppingCartToTest {
+      val cost = checkoutSystem.checkout(List("orange", "orange", "orange", "orange", "orange", "orange"))
+      assert(cost == 1.0)
+
+      val cost2 = checkoutSystem.checkout(List("orange", "orange", "orange", "orange"))
+      assert(cost2 == 0.75)
     }
   }
 }
