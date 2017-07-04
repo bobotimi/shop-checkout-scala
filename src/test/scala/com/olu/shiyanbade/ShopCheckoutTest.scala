@@ -20,7 +20,7 @@ class ShopCheckoutTest extends FunSuite {
 
   test("should return zero when shopping cart is null") {
     new ShoppingCartToTest {
-      val cost = checkoutSystem.checkout(Nil)
+      val cost = checkoutSystem.checkout(null)
       assert(cost == 0.0)
     }
   }

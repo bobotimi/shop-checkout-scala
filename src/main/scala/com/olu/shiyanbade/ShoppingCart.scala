@@ -13,9 +13,11 @@ class ShoppingCart(prices: Map[String, Double]) {
       }
     }
 
-    val cost = list
+    val cost = Option(list)
+      .getOrElse(Nil)
       .map(_.toLowerCase)
-      .groupBy(item => item).map(x => (x._1, x._2.length))
+      .groupBy(item => item)
+      .map(x => (x._1, x._2.length))
       .map(applyOffers).sum
     f"$cost%.2f".toDouble
   }
