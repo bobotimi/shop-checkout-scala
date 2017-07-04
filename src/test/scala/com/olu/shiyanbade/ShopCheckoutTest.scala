@@ -8,7 +8,7 @@ import org.scalatest.junit.JUnitRunner
 class ShopCheckoutTest extends FunSuite {
 
   trait ShoppingCartToTest {
-    val checkoutSystem = new ShoppingCart(Map("apple" -> 0.60, "orange" -> 0.25))
+    val checkoutSystem = new ShoppingCart(Map("apple" -> BigDecimal(0.60), "orange" -> BigDecimal(0.25)))
   }
 
   test("should return zero when shopping cart is empty") {
