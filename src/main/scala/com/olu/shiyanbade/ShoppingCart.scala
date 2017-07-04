@@ -18,13 +18,12 @@ class ShoppingCart(prices: Map[String, BigDecimal]) {
       }
     }
 
-    val cost = Option(list)
+    Option(list)
       .getOrElse(Nil)
       .map(_.toLowerCase)
       .groupBy(item => item)
       .map(x => (x._1, x._2.length))
       .map(applyOffers).sum
-   cost
   }
 
 }
