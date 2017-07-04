@@ -15,7 +15,7 @@ class ShoppingCart(prices: Map[String, Double]) {
 
     val cost = list
       .map(_.toLowerCase)
-      .foldLeft(Map[String, Int]())((result, item) => result + (item -> (result.getOrElse(item, 0) + 1)))
+      .groupBy(item => item).map(x => (x._1, x._2.length))
       .map(applyOffers).sum
     f"$cost%.2f".toDouble
   }
