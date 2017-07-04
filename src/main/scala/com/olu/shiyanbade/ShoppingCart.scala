@@ -1,15 +1,20 @@
 package com.olu.shiyanbade
 
 class ShoppingCart(prices: Map[String, Double]) {
+  private val APPLE = "apple"
+  private val ORANGE = "orange"
 
   def checkout(list: List[String]) = {
     def applyOffers(itemAndCount: (String, Int)) = {
       val count = itemAndCount._2
       val item = itemAndCount._1
-      if (item.equalsIgnoreCase("apple")) {
+      if (APPLE.equalsIgnoreCase(item)) {
         prices.getOrElse(item, 0.0) * (count - (count / 2))
-      } else {
+      } else if (ORANGE.equalsIgnoreCase(item)) {
         prices.getOrElse(item, 0.0) * (count - (count / 3))
+      }
+      else {
+        0.0
       }
     }
 
