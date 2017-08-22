@@ -5,8 +5,7 @@ class ShoppingCart(prices: Map[String, BigDecimal]) {
 
   def checkout(list: List[String]) = {
     def computeCost(itemAndCount: (String, Int)) = {
-      val count = itemAndCount._2
-      val item = itemAndCount._1
+      val (item, count) = itemAndCount
       if (APPLE.equalsIgnoreCase(item)) {
         prices.getOrElse(item, BigDecimal(0.0)) * (count - (count / 2))
       } else {
