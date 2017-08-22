@@ -6,10 +6,11 @@ class ShoppingCart(prices: Map[String, BigDecimal]) {
   def checkout(list: List[String]) = {
     def computeCost(itemAndCount: (String, Int)) = {
       val (item, count) = itemAndCount
+      val price = prices(item)
       if (APPLE.equalsIgnoreCase(item)) {
-        prices.getOrElse(item, BigDecimal(0.0)) * (count - (count / 2))
+        price * (count - (count / 2))
       } else {
-        prices.getOrElse(item, BigDecimal(0.0)) * (count - (count / 3))
+        price * (count - (count / 3))
       }
     }
 
